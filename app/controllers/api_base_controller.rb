@@ -1,0 +1,2 @@
+class ApiBaseController < ApplicationController
+end
