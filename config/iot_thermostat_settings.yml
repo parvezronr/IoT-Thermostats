@@ -1,0 +1,22 @@
+defaults: &defaults
+  asset_host:
+    enabled: false
+    web_url: http://localhost:3000
+    url: http://localhost:3000
+  host: localhost
+  port: 3000  # used by the swagger to generate json files
+  protocol: http
+
+  swagger_defaults:
+    host: localhost:3000
+    port: 80  # used by the swagger to generate json files
+    protocol: http
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -1,0 +1,97 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "readings",
+  "apis": [
+    {
+      "path": "/api/v1/readings.json",
+      "operations": [
+        {
+          "summary": "Reading create action",
+          "notes": "Creates a Reading",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "reading[temperature]",
+              "type": "number",
+              "description": "Temperature",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "reading[humidity]",
+              "type": "number",
+              "description": "Humidity",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "reading[battery_charge]",
+              "type": "number",
+              "description": "Battery Charge",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 201,
+              "responseModel": null,
+              "message": "Created"
+            },
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Readings#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/readings/{id}.json",
+      "operations": [
+        {
+          "summary": "Shows a Reading",
+          "notes": "Shows a Reading",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Reading ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Readings#show",
+          "method": "get"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}
