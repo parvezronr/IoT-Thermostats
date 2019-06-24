@@ -12,7 +12,6 @@ class Api::V1::ThermoStatsController < ApiBaseController
 
   # GET /thermo_stats
   def index
-    # "Need more work"
     @thermo_stats = ThermoStat.all
     render json: @thermo_stats, status: :ok
   end
@@ -27,7 +26,6 @@ class Api::V1::ThermoStatsController < ApiBaseController
 
   # POST /thermo_stats
   def create
-    # p "Yet to work on this"
     @thermo_stat = ThermoStat.new(thermo_stat_params)
     @thermo_stat.household_token = ThermoStat.generate_household_token
     if @thermo_stat.save

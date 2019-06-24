@@ -16,7 +16,6 @@ class Api::V1::ReadingsController < ApiBaseController
 
   # GET /readings/1
   def show
-    #need more work
     params[:reading_id] ||= params[:id]
     if params[:reading_id].present?
       @reading = @thermo_stat.readings.find_by_number(params[:reading_id]) ||
