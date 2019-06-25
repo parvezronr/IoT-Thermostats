@@ -2,6 +2,26 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::ReadingsController, :type => :controller do
 
+  swagger_api :show do
+    summary 'Display a Reading'
+    notes 'Display a Reading'
+    param :path, :id, :integer, :required, 'Reading ID'
+    response :ok
+    response :unauthorized
+    response :bad_request
+  end
+
+  swagger_api :create do
+    summary 'Reading create action'
+    notes 'Builds a Reading'
+    param :form, :"reading[temperature]", :number, :required, 'Temperature'
+    param :form, :"reading[humidity]", :number, :required, 'Humidity'
+    param :form, :"reading[battery_charge]", :number, :required, 'Battery-Charge'
+    response :created
+    response :unauthorized
+    response :bad_request
+  end
+  
   before(:each) do |test|
     @thermo_stat = FactoryBot.create(:thermo_stat)
     request.headers['x-api-key'] = @thermo_stat.household_token unless test.metadata[:unauthorized]

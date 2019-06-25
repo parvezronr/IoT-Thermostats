@@ -2,6 +2,35 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::ThermoStatsController, :type => :controller do
 
+  swagger_api :index do
+    summary 'Display all Thermostats'
+    notes 'Display all Thermostats'
+  end
+
+  swagger_api :create do
+    summary 'Thermostat creation'
+    notes 'Creation of a Thermostat'
+    param :form, :"thermo_stat[location]", :string, :required, 'Message of the micro-blog'
+    response :created
+    response :bad_request
+  end
+  
+  swagger_api :show do
+    summary 'Display a micro-blog'
+    notes 'Display a thermo-stat with token and possible actions'
+    param :path, :id, :integer, :required, 'Thermo-stat ID'
+    response :ok
+    response :bad_request
+  end
+
+  swagger_api :my_stats do
+    summary 'Display thermostat min, max, avg values for temperature, humidity, battery-charge'
+    notes 'Get min, max, avg values for temperature, humidity, battery charge'
+    response :ok
+    response :unauthorized
+    response :bad_request
+  end
+
   before(:each) do |test|
     if test.metadata[:my_stats]
       @thermo_stat = FactoryBot.create(:thermo_stat)
