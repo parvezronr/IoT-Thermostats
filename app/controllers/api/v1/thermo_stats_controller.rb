@@ -1,13 +1,13 @@
 class Api::V1::ThermoStatsController < ApiBaseController
 
-  before_action :set_thermo_stat, only: [:show]
+  before_action :thermo_stat_set, only: [:show]
   before_action :find_node, only: [:my_stats]
 
   swagger_controller :thermo_stats, 'ThermoStats management'
 
   swagger_api :index do
-    summary 'Returns all Thermostats'
-    notes 'Returns all Thermostats'
+    summary 'Display all Thermostats'
+    notes 'Display all Thermostats'
   end
 
   # GET /thermo_stats
@@ -17,8 +17,8 @@ class Api::V1::ThermoStatsController < ApiBaseController
   end
 
   swagger_api :create do
-    summary 'Thermo-stat create action'
-    notes 'Creates a Thermo-stat'
+    summary 'Thermostat creation'
+    notes 'Creation of a Thermostat'
     param :form, :"thermo_stat[location]", :string, :required, 'Message of the micro-blog'
     response :created
     response :bad_request
@@ -27,7 +27,7 @@ class Api::V1::ThermoStatsController < ApiBaseController
   # POST /thermo_stats
   def create
     @thermo_stat = ThermoStat.new(thermo_stat_params)
-    @thermo_stat.household_token = ThermoStat.generate_household_token
+    @thermo_stat.household_token = ThermoStat.set_up_household_token
     if @thermo_stat.save
       render json: @thermo_stat, status: :created
     else
@@ -36,8 +36,8 @@ class Api::V1::ThermoStatsController < ApiBaseController
   end
 
   swagger_api :show do
-    summary 'Shows a micro-blog'
-    notes 'Shows a thermo-stat with token and possible actions'
+    summary 'Display a micro-blog'
+    notes 'Display a thermo-stat with token and possible actions'
     param :path, :id, :integer, :required, 'Thermo-stat ID'
     response :ok
     response :bad_request
@@ -49,7 +49,7 @@ class Api::V1::ThermoStatsController < ApiBaseController
   end
 
   swagger_api :my_stats do
-    summary 'Display thermostat min, max, avg values for temperature, humidity, battery charge'
+    summary 'Display thermostat min, max, avg values for temperature, humidity, battery-charge'
     notes 'Get min, max, avg values for temperature, humidity, battery charge'
     response :ok
     response :unauthorized
@@ -62,12 +62,13 @@ class Api::V1::ThermoStatsController < ApiBaseController
   end
 
   private
-  def set_thermo_stat
-    @thermo_stat = ThermoStat.find(params[:id])
-  end
-
-  # Only allow a trusted parameter "white list" through.
+  # Allows trusted parameter "white list" through.
   def thermo_stat_params
     params.require(:thermo_stat).permit(:household_token, :location)
+  end
+
+  # Set thermostat.
+  def thermo_stat_set
+    @thermo_stat = ThermoStat.find(params[:id])
   end
 end

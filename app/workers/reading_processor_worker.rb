@@ -15,7 +15,7 @@ class ReadingProcessorWorker
       if reading.save
         thermo_stat.unsaved_readings.delete("#{number}")
       else
-        Rails.logger.fatal("Readings Processor: Please verify if the redis server is running, reading paramerter")
+        Rails.logger.fatal("Readings Processor: Ensure that redis server is running, reading paramerter")
         Rails.logger.fatal("#{Rails.backtrace_cleaner.clean(e.backtrace).join("\n")}")
       end
     end

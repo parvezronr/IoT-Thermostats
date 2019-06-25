@@ -23,8 +23,8 @@ class ThermoStat < ApplicationRecord
   hash_key :unsaved_readings
   hash_key :stats
 
-  before_create do |thermo_stat|
-    thermo_stat.household_token = ThermoStat.generate_household_token
+  before_create do |t_stat|
+    t_stat.household_token = ThermoStat.set_up_household_token
   end
 
   class << self
@@ -32,7 +32,7 @@ class ThermoStat < ApplicationRecord
       user = ThermoStat.find_by_household_token household_token
     end
 
-    def generate_household_token
+    def set_up_household_token
       loop do
         token = SecureRandom.base64.tr('+/=', 'Qrt')
         break token unless ThermoStat.exists?(household_token: token)
@@ -40,7 +40,7 @@ class ThermoStat < ApplicationRecord
     end
   end
 
-  def is_valid_sequence?(number)
+  def is_accurate_sequence?(number)
     self.readings.find_by_number(number).blank?
   end
 

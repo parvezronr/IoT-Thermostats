@@ -36,13 +36,13 @@ RSpec.describe ThermoStat, :type => :model do
     end
 
     it "Generate Household token" do
-      token = ThermoStat.generate_household_token
+      token = ThermoStat.set_up_household_token
       expect(token ).not_to be_nil
       expect(ThermoStat.exists?(household_token: token)).to be_falsy
     end
 
     it "checks for valid sequence" do
-      expect(thermo_stat.is_valid_sequence?(1)).to be_truthy
+      expect(thermo_stat.is_accurate_sequence?(1)).to be_truthy
     end
 
   end
