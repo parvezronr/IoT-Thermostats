@@ -5,15 +5,6 @@ class Api::V1::ReadingsController < ApiBaseController
 
   swagger_controller :readings, 'Reading Management'
 
-  swagger_api :show do
-    summary 'Display a Reading'
-    notes 'Display a Reading'
-    param :path, :id, :integer, :required, 'Reading ID'
-    response :ok
-    response :unauthorized
-    response :bad_request
-  end
-
   # GET /readings/1
   def show
     params[:reading_id] ||= params[:id]
@@ -24,17 +15,6 @@ class Api::V1::ReadingsController < ApiBaseController
     else
       render_error_state('Invalid Input', :bad_request)
     end
-  end
-
-  swagger_api :create do
-    summary 'Reading create action'
-    notes 'Builds a Reading'
-    param :form, :"reading[temperature]", :number, :required, 'Temperature'
-    param :form, :"reading[humidity]", :number, :required, 'Humidity'
-    param :form, :"reading[battery_charge]", :number, :required, 'Battery-Charge'
-    response :created
-    response :unauthorized
-    response :bad_request
   end
 
   # POST /readings

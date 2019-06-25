@@ -21,7 +21,4 @@ class Reading < ApplicationRecord
   validates :humidity, presence: true, numericality: { only_float: true }
   validates :battery_charge, presence: true, numericality: { only_float: true }
   validates :number, uniqueness: { scope: :thermo_stat_id }
-
-  class << self
-  end
 end

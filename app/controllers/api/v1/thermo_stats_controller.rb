@@ -5,23 +5,10 @@ class Api::V1::ThermoStatsController < ApiBaseController
 
   swagger_controller :thermo_stats, 'ThermoStats management'
 
-  swagger_api :index do
-    summary 'Display all Thermostats'
-    notes 'Display all Thermostats'
-  end
-
   # GET /thermo_stats
   def index
     @thermo_stats = ThermoStat.all
     render json: @thermo_stats, status: :ok
-  end
-
-  swagger_api :create do
-    summary 'Thermostat creation'
-    notes 'Creation of a Thermostat'
-    param :form, :"thermo_stat[location]", :string, :required, 'Message of the micro-blog'
-    response :created
-    response :bad_request
   end
 
   # POST /thermo_stats
@@ -35,25 +22,9 @@ class Api::V1::ThermoStatsController < ApiBaseController
     end
   end
 
-  swagger_api :show do
-    summary 'Display a micro-blog'
-    notes 'Display a thermo-stat with token and possible actions'
-    param :path, :id, :integer, :required, 'Thermo-stat ID'
-    response :ok
-    response :bad_request
-  end
-
   # GET /thermo_stats/1
   def show
     render json: @thermo_stat
-  end
-
-  swagger_api :my_stats do
-    summary 'Display thermostat min, max, avg values for temperature, humidity, battery-charge'
-    notes 'Get min, max, avg values for temperature, humidity, battery charge'
-    response :ok
-    response :unauthorized
-    response :bad_request
   end
 
   # GET /thermo_stats/my_stats
