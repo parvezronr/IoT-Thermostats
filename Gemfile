@@ -10,7 +10,7 @@ gem 'pg', '~> 1.1.3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use Rake
-gem 'rake', '< 11.0'
+gem 'rake', '< 13.0'
 # Serializing API Output
 gem 'active_model_serializers'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
