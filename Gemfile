@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.0'
 # Use POSTGRESQL as the database for Active Record
 gem 'pg', '~> 1.1.3'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4.3'
 # Use Rake
 gem 'rake', '< 11.0'
 # Serializing API Output
